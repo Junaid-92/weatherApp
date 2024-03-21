@@ -30,8 +30,7 @@ const App = () => {
               options={{
                 headerTitle: "Home Screen",
                 headerTitleStyle: { color: "white" },
-                headerBackAllowFontScaling: false,
-                headerTintColor: "white",
+                headerLeft: ()=> null,
                 headerStyle: { backgroundColor: "#3167e7" },
               }}
               name="DetailsScreen"
