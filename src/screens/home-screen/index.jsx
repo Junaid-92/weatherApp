@@ -38,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
 
   const currentTemp = convertKelvinToCalsius(weatherData[1]?.data?.main?.temp);
   const currentCity = weatherData[1]?.name;
-  console.log(weatherData[1]?.data?.main?.temp);
+  const currentWeather = weatherData[1]?.data?.weather[0]?.main;
 
   return (
     <View style={styles.body}>
@@ -52,20 +52,24 @@ const HomeScreen = ({ navigation }) => {
       )}
       <View style={styles.container}>
         <View>
-          <View style={styles.currentTemp}>
-            {currentTempIcon && (
-              <Image
-                style={styles.icon}
-                resizeMode="contain"
-                source={{
-                  uri: currentTempIcon,
-                }}
-              />
-            )}
-            <Text style={styles.currentTempText}>{currentTemp}°</Text>
-          </View>
-          <Text style={styles.currentCityNameTxt}>{currentCity}</Text>
+          <Text style={styles.title}>Current Weather</Text>
 
+          <View style={styles.currentTemp}>
+            <View style={styles.row}>
+              {currentTempIcon && (
+                <Image
+                  style={styles.icon}
+                  resizeMode="contain"
+                  source={{
+                    uri: currentTempIcon,
+                  }}
+                />
+              )}
+              <Text style={styles.currentTempText}>{currentTemp}°</Text>
+            </View>
+            <Text style={styles.currentCityNameTxt}>{currentCity}</Text>
+          </View>
+          <Text style={styles.currentWeatherTxt}>{currentWeather}</Text>
         </View>
         <View>
           {weatherData &&
@@ -98,17 +102,31 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
   },
+  title: {
+    fontSize: RFPercentage(3),
+    fontWeight: "bold",
+    color: "white",
+    alignSelf: "center",
+  },
   loader: {
     position: "absolute",
     top: hp(50),
     left: wp(50),
   },
+  row: { flexDirection: "row", alignItems: "center" },
   currentTemp: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
   },
   currentCityNameTxt: {
     fontSize: RFPercentage(3),
+    marginHorizontal: wp(5),
+    fontWeight: "bold",
+    color: "white",
+  },
+  currentWeatherTxt: {
+    fontSize: RFPercentage(3.5),
     marginHorizontal: wp(5),
     fontWeight: "bold",
     color: "white",
