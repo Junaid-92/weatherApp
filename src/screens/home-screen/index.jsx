@@ -1,6 +1,6 @@
 // HomeScreen.js
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -11,7 +11,11 @@ import {
   StatusBar,
   ActivityIndicator,
 } from "react-native";
-import { convertKelvinToCalsius, getWeatherData } from "./helpers";
+import {
+  convertKelvinToCalsius,
+  getCurrentWeather,
+  getWeatherData,
+} from "./helpers";
 import { useQuery } from "react-query";
 import {
   heightPercentageToDP as hp,
@@ -26,19 +30,24 @@ const HomeScreen = ({ navigation }) => {
     isFetching,
     isError,
   } = useQuery({
-    queryKey: ["get-location-data"],
+    queryKey: ["get-weather-data"],
     queryFn: () => {
       return getWeatherData();
     },
   });
-  const currentTempIcon =
-    "https://openweathermap.org/img/wn/" +
-    weatherData[1]?.data?.weather[0]?.icon +
-    "@4x.png";
 
-  const currentTemp = convertKelvinToCalsius(weatherData[1]?.data?.main?.temp);
-  const currentCity = weatherData[1]?.name;
-  const currentWeather = weatherData[1]?.data?.weather[0]?.main;
+  const { data: currentWeatherData, isFetching: isCurrentWeatherFetching } =
+    useQuery({
+      queryKey: ["get-current-weather-data"],
+      queryFn: async () => {
+        return await getCurrentWeather();
+      },
+    });
+  const currentTempIcon =
+    weatherData &&
+    "https://openweathermap.org/img/wn/" +
+      weatherData[1]?.data?.weather[0]?.icon +
+      "@4x.png";
 
   return (
     <View style={styles.body}>
@@ -65,11 +74,19 @@ const HomeScreen = ({ navigation }) => {
                   }}
                 />
               )}
-              <Text style={styles.currentTempText}>{currentTemp}°</Text>
+              <Text style={styles.currentTempText}>
+                {currentWeatherData?.temperature
+                  ? parseInt(currentWeatherData?.temperature) + "°"
+                  : ""}
+              </Text>
             </View>
-            <Text style={styles.currentCityNameTxt}>{currentCity}</Text>
+            <Text style={styles.currentCityNameTxt}>
+              {currentWeatherData?.city}
+            </Text>
           </View>
-          <Text style={styles.currentWeatherTxt}>{currentWeather}</Text>
+          <Text style={styles.currentWeatherTxt}>
+            {currentWeatherData?.description}
+          </Text>
         </View>
         <View>
           {weatherData &&
