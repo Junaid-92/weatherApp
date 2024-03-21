@@ -63,30 +63,34 @@ const HomeScreen = ({ navigation }) => {
         <View>
           <Text style={styles.title}>Current Weather</Text>
 
-          <View style={styles.currentTemp}>
-            <View style={styles.row}>
-              {currentTempIcon && (
-                <Image
-                  style={styles.icon}
-                  resizeMode="contain"
-                  source={{
-                    uri: currentWeatherData?.icon,
-                  }}
-                />
-              )}
-              <Text style={styles.currentTempText}>
-                {currentWeatherData?.temperature
-                  ? parseInt(currentWeatherData?.temperature) + "°"
-                  : ""}
+          {!isCurrentWeatherFetching && (
+            <>
+              <View style={styles.currentTemp}>
+                <View style={styles.row}>
+                  {currentTempIcon && (
+                    <Image
+                      style={styles.icon}
+                      resizeMode="contain"
+                      source={{
+                        uri: currentWeatherData?.icon,
+                      }}
+                    />
+                  )}
+                  <Text style={styles.currentTempText}>
+                    {currentWeatherData?.temperature
+                      ? parseInt(currentWeatherData?.temperature) + "°"
+                      : ""}
+                  </Text>
+                </View>
+                <Text style={styles.currentCityNameTxt}>
+                  {currentWeatherData?.city}
+                </Text>
+              </View>
+              <Text style={styles.currentWeatherTxt}>
+                {currentWeatherData?.description}
               </Text>
-            </View>
-            <Text style={styles.currentCityNameTxt}>
-              {currentWeatherData?.city}
-            </Text>
-          </View>
-          <Text style={styles.currentWeatherTxt}>
-            {currentWeatherData?.description}
-          </Text>
+            </>
+          )}
         </View>
         <View>
           {weatherData &&
