@@ -61,8 +61,6 @@ const HomeScreen = ({ navigation }) => {
       )}
       <View style={styles.container}>
         <View>
-          <Text style={styles.title}>Current Weather</Text>
-
           {!isCurrentWeatherFetching && (
             <>
               <View style={styles.currentTemp}>

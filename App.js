@@ -12,12 +12,16 @@ const queryClient = new QueryClient(); // Create an instance of QueryClient
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <View style={{ backgroundColor: "#3167e7", flex:1 }}>
+      <View style={{ backgroundColor: "#3167e7", flex: 1 }}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen
               options={{
-                headerShown: false,
+                headerTitle: "Current Weather",
+                headerTitleStyle: { color: "white" },
+                headerBackAllowFontScaling: false,
+                headerTintColor: "white",
+                headerStyle: { backgroundColor: "#0ea0ac" },
               }}
               name="Home"
               component={HomeScreen}
