@@ -66,7 +66,10 @@ export async function getCurrentWeather() {
     const weatherInfo = {
       temperature: data?.main?.temp,
       description: data?.weather[0]?.main,
-      icon: data?.weather[0]?.icon,
+      icon:
+        "https://openweathermap.org/img/wn/" +
+        data?.weather[0]?.icon +
+        "@4x.png",
       city: data?.name,
       country: data?.sys?.country,
     };

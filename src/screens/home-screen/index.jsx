@@ -70,7 +70,7 @@ const HomeScreen = ({ navigation }) => {
                   style={styles.icon}
                   resizeMode="contain"
                   source={{
-                    uri: currentTempIcon,
+                    uri: currentWeatherData?.icon,
                   }}
                 />
               )}
