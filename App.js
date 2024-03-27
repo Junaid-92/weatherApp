@@ -20,7 +20,7 @@ const App = () => {
                 headerTitle: "Current Weather",
                 headerTitleStyle: { color: "white" },
                 headerBackAllowFontScaling: false,
-                headerTintColor: "white",
+                
                 headerStyle: { backgroundColor: "#0ea0ac" },
               }}
               name="Home"
@@ -30,7 +30,7 @@ const App = () => {
               options={{
                 headerTitle: "Home Screen",
                 headerTitleStyle: { color: "white" },
-                headerLeft: ()=> null,
+                headerTintColor: "white",
                 headerStyle: { backgroundColor: "#3167e7" },
               }}
               name="DetailsScreen"
